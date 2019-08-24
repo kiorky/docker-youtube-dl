@@ -1,23 +1,36 @@
 # docker-youtube-dl
-Docker image of [youtube-dl](https://github.com/rg3/youtube-dl).
+- Docker image wrapper of
+    - [youtube-dl](https://github.com/rg3/youtube-dl)
+    - [streamlink](https://github.com/streamlink/streamlink)
 
-# Build
+
+## Build
 ```bash
-$ docker build --build-arg VERSION=$YOUTUBEDL_VERSION -t youtube-dl .
-# docker build --build-arg VERSION=2018.12.17 -t youtube-dl .
+docker-compose build
 ```
 
-# Usage
+## configure
+Set mediaserver (output) path
 
-### Run `youtube-dl` directly
 ```bash
-docker run --rm -it kiorky/youtube-dl:latest --help
+cp docker.env.dist docker.env
+$EDITOR docker.env
 ```
 
-### Run shell
+## Usage
+
+youtube-dl
+
 ```bash
 docker-compose run --rm --entrypoint bash s -exc \
-    "mkdir -p /mediaserver/videos/x && cd /mediaserver/videos/x && youtube-dl -cit 'https://www.youtube.com/watch?v=x'"
+    "mkdir -p /mediaserver/videos/x && cd /mediaserver/videos/x \
+    && youtube-dl -cit 'https://www.youtube.com/watch?v=x'"
+```
+
+streamlink
+
+```bash
 docker-compose run --rm --entrypoint bash s -exc \
-    "mkdir -p /mediaserver/videos/x && cd /mediaserver/videos/x && streamlink --hls-live-restart -o 'outfile' 'url' best"
+    "mkdir -p /mediaserver/videos/x && cd /mediaserver/videos/x \
+    && streamlink --hls-live-restart -o 'outfile' 'url' best"
 ```
