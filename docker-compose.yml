@@ -1,0 +1,10 @@
+---
+version: "3.7"
+services:
+  s:
+    env_file: [docker.env]
+    image: kiorky/youtube-dl
+    build:
+      context: .
+    volumes:
+    - ${MEDIASERVER_PATH:-/mediaserver}:/mediaserver
