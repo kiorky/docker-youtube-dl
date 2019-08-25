@@ -16,8 +16,8 @@ docker run --rm -it kiorky/youtube-dl:latest --help
 
 ### Run shell
 ```bash
-docker run --rm -it --entrypoint=/bin/sh rayou/youtube-dl:latest
-
 docker-compose run --rm --entrypoint bash s -exc \
     "mkdir -p /mediaserver/videos/x && cd /mediaserver/videos/x && youtube-dl -cit 'https://www.youtube.com/watch?v=x'"
+docker-compose run --rm --entrypoint bash s -exc \
+    "mkdir -p /mediaserver/videos/x && cd /mediaserver/videos/x && streamlink --hls-live-restart -o 'outfile' 'url' best"
 ```
